@@ -18,7 +18,8 @@ const ContactForm = () => {
           <input
             name="firstName"
             placeholder="Edd"
-            ref={register({ required: true, maxLength: 3 })}
+            ref={register({ required: true, minLength: 3 })}
+            data-testid="firstName"
           />
           {errors.firstName && (
             <p>Looks like there was an error: {errors.firstName.type}</p>
@@ -26,11 +27,13 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="lastName">Last Name*</label>
+          <label id="lastnameLabel" htmlFor="lastName">Last Name*</label>
           <input
             name="lastName"
             placeholder="Burke"
             ref={register({ required: true })}
+            data-testid="lastName"
+            aria-labelledby="lastnameLabel"
           />
           {errors.lastName && (
             <p>Looks like there was an error: {errors.lastName.type}</p>
@@ -41,21 +44,30 @@ const ContactForm = () => {
           <label htmlFor="email" placeholder="bluebill1049@hotmail.com">
             Email*
           </label>
-          <input name="email" ref={register({ required: true })} />
+          <input
+            name="email"
+            ref={register({ required: true })}
+            data-testid="email"
+          />
           {errors.email && (
             <p>Looks like there was an error: {errors.email.type}</p>
           )}
         </div>
         <div>
           <label htmlFor="message">Message</label>
-          <textarea name="message" ref={register({ required: false })} />
+          <textarea
+            name="message"
+            ref={register({ required: false })}
+            data-testid="message"
+          />
         </div>
         {data && (
-          <pre style={{ textAlign: "left", color: "white" }}>
-            {JSON.stringify(data, null, 2)}
+          <pre style={{ textAlign: "left", color: "white" }} data-testid="result">
+            {/* {JSON.stringify(data, null, 2)} */}
+            {JSON.stringify(data)}
           </pre>
         )}
-        <input type="submit" />
+        <input type="submit" data-testid="submit" />
       </form>
     </div>
   );
